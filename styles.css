@@ -5,75 +5,106 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+:root{
+    --bg:#0f1724; /* deep navy */
+    --surface:#0b1220; /* card surface */
+    --muted:#9aa6b2; /* subtle text */
+    --text:#dbe7ee; /* primary text */
+    --accent:#06b6d4; /* teal-ish */
+    --accent-2:#ffb86b; /* warm accent */
 }
 
-/* Header */
-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
+body {
+    font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--bg);
+    background-image: url('images/sitebg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Header (Ubuntu + Terminal theme) */
+.site-header{
+    position: relative;
+    height: 220px;
+    overflow: hidden;
     margin-bottom: 1rem;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+.site-header::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Use HOMEBG.png for header by default; can be overridden by JS */
+    background-image: var(--header-bg, url('images/HOMEBG.png'));
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.35);
+    transform: scale(1.05);
+    z-index: 0;
 }
 
-header p {
-    font-size: 1.1rem;
+.site-header .header-inner{
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 100%;
+    display:flex;
+    align-items:center;
+    padding: 0 1rem;
 }
 
-/* Navigation */
-nav {
-    background-color: #333;
-    padding: 1rem;
-    margin-bottom: 2rem;
+.profile{ display:flex; align-items:center; gap:1rem; }
+.profile img{ width:96px; height:96px; border-radius:8px; object-fit:cover; border:2px solid rgba(255,255,255,0.06); box-shadow: 0 6px 18px rgba(2,6,23,0.6);} 
+.profile-info{ color:var(--text); }
+.profile-info h1{ margin:0; font-size:1.4rem; color:var(--accent); font-weight:700; }
+.contact-line{ margin-top:0.25rem; color:var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; font-size:0.95rem; }
+.contact-line a{ color:var(--muted); text-decoration:none; }
+.contact-line a:hover{ color:var(--accent-2); }
+
+/* ensure main sections use surface color under new theme (except home which is immersive) */
+main { background: transparent; }
+section { background: var(--surface); color:var(--text); box-shadow: none; }
+section h2{ color: var(--accent-2); }
+#home { background: transparent; }
+
+/* Navigation (modern modular) */
+.main-nav{
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 140;
+    background: rgba(11,17,32,0.45);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
 }
-
-nav .nav-tabs {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0;
+.main-nav .nav-container{
+    max-width:1100px; margin:0 auto; display:flex; align-items:center; gap:1rem; padding:0.5rem 1rem; justify-content:space-between;
 }
+.brand{ display:flex; align-items:center; gap:0.6rem; color:var(--accent); text-decoration:none; font-weight:700; }
+.brand-icon{ font-family: monospace; font-size:1.1rem; opacity:0.95; }
+.brand-text{ color:var(--text); }
 
-.tab-button {
-    background-color: transparent;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    text-transform: capitalize;
-}
+.nav-toggle{ display:none; background:transparent; border:none; padding:0.4rem; cursor:pointer; }
+.nav-toggle .hamburger{ width:22px; height:2px; background:var(--muted); display:block; position:relative; }
+.nav-toggle .hamburger::before, .nav-toggle .hamburger::after{ content:''; position:absolute; left:0; width:22px; height:2px; background:var(--muted); transition: transform 0.2s ease; }
+.nav-toggle .hamburger::before{ top:-6px; }
+.nav-toggle .hamburger::after{ top:6px; }
 
-.tab-button:hover {
-    background-color: #555;
-    color: #667eea;
-}
+.nav-list{ list-style:none; display:flex; gap:0.25rem; align-items:center; }
+.nav-list li{ }
+.nav-link{ background:transparent; color:var(--muted); border:0; padding:0.65rem 0.9rem; border-radius:6px; cursor:pointer; font-weight:600; }
+.nav-link:hover{ background:rgba(255,255,255,0.02); color:var(--text); }
+.nav-link.active{ color:var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
 
-.tab-button.active {
-    background-color: #667eea;
-    color: white;
-    border-bottom: 3px solid #764ba2;
-}
-
-.tab-button:focus {
-    outline: 2px solid #667eea;
-    outline-offset: -2px;
+/* Mobile behavior */
+@media (max-width: 780px){
+    .nav-toggle{ display:block; }
+    .nav-list{ position:absolute; right:1rem; top:100%; background:var(--surface); flex-direction:column; padding:0.5rem; border-radius:8px; box-shadow:0 8px 24px rgba(2,6,23,0.6); display:none; min-width:160px; }
+    .nav-list.open{ display:flex; }
+    .nav-list .nav-link{ width:100%; text-align:left; }
 }
 
 /* Main Content */
@@ -116,9 +147,19 @@ section h2 {
     }
 }
 
+/* Chat styles */
+.chat-window{ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:1rem; border-radius:8px; max-width:900px; margin:0 auto; }
+.messages{ list-style:none; display:flex; flex-direction:column; gap:0.5rem; max-height:300px; overflow:auto; padding:0.5rem; }
+.message{ display:inline-block; padding:0.5rem 0.75rem; border-radius:6px; max-width:80%; font-size:0.95rem; }
+.message.user{ background: linear-gradient(180deg,var(--accent), #0399aa); color:#041022; align-self:flex-end; border-bottom-right-radius:2px; }
+.message.bot{ background: rgba(255,255,255,0.03); color:var(--muted); align-self:flex-start; }
+.chat-form{ display:flex; gap:0.5rem; margin-top:0.6rem; }
+.chat-form input{ flex:1; padding:0.6rem; border-radius:6px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--text); }
+.chat-form button{ padding:0.6rem 0.9rem; border-radius:6px; border:none; background:var(--accent); color:#041022; cursor:pointer; }
+
 /* Home Section */
 #home h2 {
-    color: #667eea;
+    color: var(--text);
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
 }
@@ -143,6 +184,59 @@ section h2 {
     color: #333;
     font-weight: 500;
 }
+
+/* Mesh gradient + Ubuntu background for entire Home tab (immersive) */
+#home {
+    /* Immersive: no separate background container, just mesh gradients over the site background */
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,184,107,0.12) 0%, transparent 20%),
+        radial-gradient(circle at 80% 10%, rgba(6,182,212,0.08) 0%, transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(105,30,180,0.08) 0%, transparent 22%),
+        url('images/HOMEBG.png');
+    background-size: cover;
+    background-blend-mode: screen, screen, screen, normal;
+    background-attachment: fixed;
+    border-radius: 0;
+    padding: 0;
+    color: var(--text);
+    margin-bottom: 0;
+}
+
+/* Ensure inner home sections remain transparent so mesh shows through */
+.home-section, .hero-inner, .home-grid { background: transparent; padding: 2rem; }
+
+.hero {
+    background: transparent;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.hero h2 { font-size: 2.4rem; margin-bottom: 0.4rem; color: var(--text); }
+.hero p { color: var(--muted); margin-bottom: 0.6rem; }
+.muted{ color: var(--muted); }
+
+.hero-cta { margin-top: 1rem; display:flex; gap:0.75rem; }
+.primary-cta { background: var(--accent); color: #041022; border: none; padding: 0.6rem 1rem; border-radius:6px; cursor:pointer; font-weight:600; }
+.secondary-cta { background: transparent; color: var(--text); border:1px solid rgba(255,255,255,0.06); padding:0.5rem 0.85rem; border-radius:6px; cursor:pointer; }
+
+.home-grid{ display:grid; grid-template-columns: repeat(12,1fr); gap:1rem; max-width:1100px; margin:0 auto; }
+.home-section{ background: var(--surface); padding:1rem; border-radius:8px; grid-column: span 4; min-height:120px; }
+.home-section h3{ color: var(--accent-2); margin-bottom:0.5rem; }
+.highlights-list{ list-style:none; padding-left:0; color:var(--text); }
+.placeholder{ color: var(--muted); }
+.placeholder-cards{ display:flex; gap:0.6rem; margin-top:0.6rem; }
+.card{ background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:0.8rem; border-radius:6px; color:var(--muted); border:1px dashed rgba(255,255,255,0.03); }
+.card.empty{ opacity:0.6; text-align:center; }
+
+@media (max-width: 900px){ .home-grid{ grid-template-columns: repeat(6,1fr);} .home-section{ grid-column: span 6;} }
+@media (max-width: 520px){ .home-grid{ grid-template-columns: repeat(1,1fr);} .home-section{ grid-column: span 1;} .hero h2{ font-size:1.6rem; } }
 
 /* Projects */
 .projects-container {
@@ -239,4 +333,4 @@ footer {
         grid-template-columns: 1fr;
     }
 }
-}
+

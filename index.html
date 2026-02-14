@@ -7,29 +7,106 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Your Name | Full Stack Developer</p>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="profile">
+                <img id="profile-photo" src="images/photo.jpg" alt="Profile photo" />
+                <div class="profile-info">
+                    <h1 id="profile-name">Your Name</h1>
+                    <p class="contact-line"><a id="email-link" href="mailto:your-testemail01@emailtest.com">your-testemail01@emailtest.com</a>
+                    <span class="sep">|</span>
+                    <a id="linkedin-link" href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <nav aria-label="Main Navigation">
-        <ul class="nav-tabs">
-            <li><button class="tab-button active" data-tab="home" aria-selected="true">Home</button></li>
-            <li><button class="tab-button" data-tab="about" aria-selected="false">About</button></li>
-            <li><button class="tab-button" data-tab="projects" aria-selected="false">Projects</button></li>
-            <li><button class="tab-button" data-tab="contact" aria-selected="false">Contact</button></li>
-        </ul>
+    <nav class="main-nav" aria-label="Main Navigation">
+        <div class="nav-container">
+            <a href="#" class="brand" aria-label="Home">
+                <span class="brand-icon"></span>
+                <span class="brand-text"></span>
+            </a>
+
+            <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list" aria-label="Toggle navigation">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+
+            <ul id="nav-list" class="nav-list" role="tablist">
+                <li><button class="nav-link tab-button active" data-tab="home" aria-selected="true" role="tab">Home</button></li>
+                <li><button class="nav-link tab-button" data-tab="about" aria-selected="false" role="tab">About</button></li>
+                <li><button class="nav-link tab-button" data-tab="projects" aria-selected="false" role="tab">Projects</button></li>
+                <li><button class="nav-link tab-button" data-tab="chat" aria-selected="false" role="tab">Chat With Me</button></li>
+            </ul>
+        </div>
     </nav>
 
     <main>
-        <!-- Home Section -->
+        <!-- Home Section (revamped) -->
         <section id="home" class="tab-content active" role="tabpanel" aria-labelledby="home">
-            <h2>Welcome Home</h2>
-            <p>Hello! Welcome to my portfolio. I'm a passionate full-stack developer dedicated to creating innovative solutions and delivering exceptional user experiences. Use the navigation above to explore my work and learn more about me.</p>
-            <div class="home-cta">
-                <p>Click the tabs above to navigate through different sections of my portfolio.</p>
+            <header class="hero">
+                <div class="hero-inner">
+                    <h2 id="hero-title">Hello, I'm Your Name</h2>
+                    <p id="hero-subtitle">Full-stack developer focused on reliable, maintainable software.</p>
+                    <p id="hero-kicker" class="muted">Professional, pragmatic, and product-minded.</p>
+                    <div class="hero-cta">
+                        <button class="primary-cta" id="cta-work">View Projects</button>
+                        <button class="secondary-cta" id="cta-contact">Contact</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="home-grid">
+                <section class="home-section" aria-labelledby="intro-heading">
+                    <h3 id="intro-heading">Introduction</h3>
+                    <p id="intro">A concise intro will go here. This area is intentionally open to be filled from an external content file so you can update text without touching markup.</p>
+                </section>
+
+                <section class="home-section" aria-labelledby="highlights-heading">
+                    <h3 id="highlights-heading">Highlights</h3>
+                    <ul id="highlights" class="highlights-list">
+                        <li class="placeholder">• Add your first highlight</li>
+                        <li class="placeholder">• Add your second highlight</li>
+                        <li class="placeholder">• Add another noteworthy skill or project</li>
+                    </ul>
+                </section>
+
+                <section class="home-section empty" aria-labelledby="placeholders-heading">
+                    <h3 id="placeholders-heading">Placeholders</h3>
+                    <p class="muted">Empty blocks for future content: testimonials, blog teasers, or quick links.</p>
+                    <div class="placeholder-cards">
+                        <div class="card empty">Empty slot</div>
+                        <div class="card empty">Empty slot</div>
+                        <div class="card empty">Empty slot</div>
+                    </div>
+                </section>
             </div>
+
         </section>
+
+                <!-- Embedded JSON fallback for file:// usage -->
+                <script type="application/json" id="home-content">
+{
+    "hero": {
+                "title": "Hello, I'm Subham Sarkar",
+                "subtitle": "Full-stack developer focused on reliable, maintainable software.",
+                "kicker": "Professional, pragmatic, and product-minded."
+    },
+    "intro": "I build pragmatic web apps with attention to accessibility, performance and maintainability. This short paragraph is editable in content/home.json.",
+    "highlights": [
+        "Built responsive interfaces with modern JS and semantic HTML",
+        "Automated builds and CI workflows",
+        "Focused on readable, testable code"
+    ],
+    "profile": {
+        "name": "Subham Sarkar",
+        "email": "your-testemail01@emailtest.com",
+        "linkedin": "https://www.linkedin.com/in/yourprofile",
+        "photo": "images/photo.svg",
+        "headerBg": "images/header-bg.svg"
+    }
+}
+                </script>
 
         <!-- About Section -->
         <section id="about" class="tab-content" role="tabpanel" aria-labelledby="about" hidden>
@@ -55,6 +132,18 @@
                     <p>Description of your second project</p>
                     <a href="#" class="project-link">View Project</a>
                 </article>
+            </div>
+        </section>
+
+        <!-- Chat Section -->
+        <section id="chat" class="tab-content" role="tabpanel" aria-labelledby="chat" hidden>
+            <h2>Chat</h2>
+            <div class="chat-window">
+                <ul class="messages" id="chat-messages" aria-live="polite"></ul>
+                <form id="chat-form" class="chat-form" aria-label="Send message">
+                    <input id="chat-input" type="text" placeholder="Type a message and press Enter" aria-label="Message" autocomplete="off" />
+                    <button type="submit" class="primary-cta">Send</button>
+                </form>
             </div>
         </section>
 
