@@ -12,48 +12,58 @@
         <p>Your Name | Full Stack Developer</p>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+    <nav aria-label="Main Navigation">
+        <ul class="nav-tabs">
+            <li><button class="tab-button active" data-tab="home" aria-selected="true">Home</button></li>
+            <li><button class="tab-button" data-tab="about" aria-selected="false">About</button></li>
+            <li><button class="tab-button" data-tab="projects" aria-selected="false">Projects</button></li>
+            <li><button class="tab-button" data-tab="contact" aria-selected="false">Contact</button></li>
         </ul>
     </nav>
 
     <main>
-        <section id="about">
+        <!-- Home Section -->
+        <section id="home" class="tab-content active" role="tabpanel" aria-labelledby="home">
+            <h2>Welcome Home</h2>
+            <p>Hello! Welcome to my portfolio. I'm a passionate full-stack developer dedicated to creating innovative solutions and delivering exceptional user experiences. Use the navigation above to explore my work and learn more about me.</p>
+            <div class="home-cta">
+                <p>Click the tabs above to navigate through different sections of my portfolio.</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="tab-content" role="tabpanel" aria-labelledby="about" hidden>
             <h2>About Me</h2>
-            <p>Tell your story here. What are your passions and what drives you as a developer?</p>
+            <article>
+                <p>Tell your story here. What are your passions and what drives you as a developer?</p>
+                <p>I'm experienced in full-stack development with a passion for clean code and user-centric design. I love solving complex problems and continuously learning new technologies.</p>
+            </article>
         </section>
 
-        <section id="projects">
+        <!-- Projects Section -->
+        <section id="projects" class="tab-content" role="tabpanel" aria-labelledby="projects" hidden>
             <h2>Projects</h2>
-            <div class="project">
-                <h3>Project 1</h3>
-                <p>Description of your first project</p>
-                <a href="#">View Project</a>
-            </div>
-            <div class="project">
-                <h3>Project 2</h3>
-                <p>Description of your second project</p>
-                <a href="#">View Project</a>
+            <div class="projects-container">
+                <article class="project">
+                    <h3>Project 1</h3>
+                    <p>Description of your first project</p>
+                    <a href="#" class="project-link">View Project</a>
+                </article>
+                <article class="project">
+                    <h3>Project 2</h3>
+                    <p>Description of your second project</p>
+                    <a href="#" class="project-link">View Project</a>
+                </article>
             </div>
         </section>
 
-        <section id="skills">
-            <h2>Skills</h2>
-            <ul>
-                <li>HTML/CSS/JavaScript</li>
-                <li>Git & GitHub</li>
-                <li>Responsive Design</li>
-            </ul>
-        </section>
-
-        <section id="contact">
+        <!-- Contact Section -->
+        <section id="contact" class="tab-content" role="tabpanel" aria-labelledby="contact" hidden>
             <h2>Contact</h2>
-            <p>Email: your-testemail01@emailtest.com</p>
-            <p>GitHub: <a href="#">GitHub link</a></p>
+            <article>
+                <p><strong>Email:</strong> <a href="mailto:your-testemail01@emailtest.com">your-testemail01@emailtest.com</a></p>
+                <p><strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener noreferrer">GitHub link</a></p>
+            </article>
         </section>
     </main>
 
